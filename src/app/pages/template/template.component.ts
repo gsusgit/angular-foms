@@ -9,19 +9,12 @@ import { PaisesService } from '../../services/paises.service';
 })
 export class TemplateComponent implements OnInit{
   paises: any[] = [];
-  /*usuario = {
+  usuario = {
     nombre: '',
-    apellido: '',
+    apellidos: '',
     email: '',
     pais: '',
     genero: '',
-  };*/
-  usuario = {
-    nombre: 'Jesús',
-    apellidos: 'Fernández Jódar',
-    email: 'fernandezjodar.jesus@gmail.com',
-    pais: 'ESP',
-    genero: 'M'
   };
   constructor(private paisesService: PaisesService) { }
   ngOnInit(): void {
