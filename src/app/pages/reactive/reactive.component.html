@@ -26,7 +26,7 @@
                placeholder="Apellido"
                formControlName="apellido"
                [class.is-invalid]="campoNoValido('apellido')">
-        <small class="text-danger" *ngIf="campoNoValido('apellido')">Ingrese al menos 5 caracteres</small>
+        <small class="text-danger" *ngIf="campoNoValido('apellido')">Ingrese al menos 5 caracteres o un apellido distinto de Fernandez</small>
       </div>
     </div>
 
@@ -42,6 +42,19 @@
              formControlName="email"
              [class.is-invalid]="campoNoValido('email')">
       <small class="text-danger" *ngIf="campoNoValido('email')">Introduzca un correo válido</small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Usuario</label>
+    <div class="col">
+
+      <input class="form-control"
+             type="text"
+             placeholder="Usuario"
+             formControlName="usuario"
+             [class.is-invalid]="usuarioNoValido">
+      <small class="text-danger" *ngIf="usuarioNoValido">Usuario incorrecto o ya existe</small>
     </div>
   </div>
 
@@ -97,7 +110,34 @@
       <button class="btn btn-primary btn-block mt-3 mb-3" type="button" (click)="agregarPasatiempo()">+ Añadir</button>
     </div>
   </div>
-  <hr>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Contraseña</label>
+    <div class="form-row col">
+      <div class="col">
+        <input class="form-control"
+               type="password"
+               placeholder="Contraseña"
+               formControlName="pass1"
+               [class.is-invalid]="pass1NoValido">
+      </div>
+      <div class="col">
+        <input class="form-control"
+               type="password"
+               placeholder="Repetir Contraseña"
+               formControlName="pass2"
+               [class.is-invalid]="pass2NoValido">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label"></label>
+    <div class="form-row col">
+      <small class="text-danger" *ngIf="pass2NoValido">Las contraseñas no coinciden</small>
+    </div>
+  </div>
+
   <div class="form-group row">
     <div class="input-group col">
       <button type="submit" class="btn btn-outline-primary btn-block">
