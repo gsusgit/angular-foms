@@ -6,27 +6,27 @@
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
-      <div class="col-8">
+      <div class="col">
 
         <input class="form-control"
                type="text"
                placeholder="Nombre"
                formControlName="nombre"
-               [class.is-invalid]="nombreNoValido">
-        <small class="text-danger" *ngIf="nombreNoValido">Ingrese al menos 5 caracteres</small>
+               [class.is-invalid]="campoNoValido('nombre')">
+        <small class="text-danger" *ngIf="campoNoValido('nombre')">Ingrese al menos 5 caracteres</small>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Apellido</label>
-      <div class="col-8">
+      <div class="col">
 
         <input class="form-control"
                type="text"
                placeholder="Apellido"
                formControlName="apellido"
-               [class.is-invalid]="apellidoNoValido">
-        <small class="text-danger" *ngIf="apellidoNoValido">Ingrese al menos 5 caracteres</small>
+               [class.is-invalid]="campoNoValido('apellido')">
+        <small class="text-danger" *ngIf="campoNoValido('apellido')">Ingrese al menos 5 caracteres</small>
       </div>
     </div>
 
@@ -34,22 +34,72 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
-    <div class="col-8">
+    <div class="col">
 
       <input class="form-control"
              type="email"
              placeholder="Correo electrónico"
              formControlName="email"
-             [class.is-invalid]="emailNoValido">
-      <small class="text-danger" *ngIf="emailNoValido">Introduzca un correo válido</small>
+             [class.is-invalid]="campoNoValido('email')">
+      <small class="text-danger" *ngIf="campoNoValido('email')">Introduzca un correo válido</small>
     </div>
   </div>
 
+  <div class="form-group row" formGroupName="direccion">
+    <label class="col-2 col-form-label">Dirección</label>
+    <div class="form-row col">
+      <div class="col">
+        <input class="form-control"
+               type="text"
+               placeholder="Código postal"
+               formControlName="codigoPostal"
+               [class.is-invalid]="campoNoValido('direccion.codigoPostal')">
+        <small class="text-danger" *ngIf="campoNoValido('direccion.codigoPostal')">Introduzca al menos 5 caracteres</small>
+      </div>
+      <div class="col">
+        <input class="form-control"
+               type="text"
+               placeholder="Ciudad"
+               formControlName="ciudad"
+               [class.is-invalid]="campoNoValido('direccion.ciudad')">
+        <small class="text-danger" *ngIf="campoNoValido('direccion.ciudad')">Introduzca al menos 5 caracteres</small>
+      </div>
+    </div>
+  </div>
 
-
+  <div class="form-group row" formGroupName="pasatiempos">
+    <label class="col-2 col-form-label">Pasatiempos</label>
+    <div class="form-row col">
+      <table class="table">
+        <thead class="thead-dark">
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Borrar</th>
+        </thead>
+        <tbody *ngFor="let pasatiempo of pasatiempos.controls; let i = index">
+          <tr>
+            <td>{{i + 1}}</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [formControlName]="i">
+            </td>
+            <td>
+              <button class="btn btn-danger"
+                      type="button"
+                      (click)="borrarPasatiempo(i)">
+                      Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary btn-block mt-3 mb-3" type="button" (click)="agregarPasatiempo()">+ Añadir</button>
+    </div>
+  </div>
+  <hr>
   <div class="form-group row">
-    <label class="col-2 col-form-label">&nbsp;</label>
-    <div class="input-group col-md-8">
+    <div class="input-group col">
       <button type="submit" class="btn btn-outline-primary btn-block">
         Guardar
       </button>
@@ -58,4 +108,10 @@
 
 </form>
 
-
+<br>
+<hr>
+<pre>
+  Estado del form: <strong>{{formGroup.status}}</strong>
+  Validez: <strong>{{formGroup.valid}}</strong>
+  Valores: <strong>{{formGroup.value|json}}</strong>
+</pre>
